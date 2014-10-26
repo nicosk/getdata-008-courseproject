@@ -1,2 +1,2 @@
-getdata-008-courseproject
-=========================
+Getting and Cleaning Data Course Project
+========================================
