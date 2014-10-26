@@ -26,21 +26,21 @@ runAnalysis <- function(outputFile="tidy.txt") {
   message(paste("Load dataset from ", getwd(), "/UCI HAR Dataset", sep=""))
   
   # Load activity labels
-  activityLabels <<- readFile("./UCI HAR Dataset/activity_labels.txt", col.names=c(activityID,activity))
+  activityLabels <- readFile("./UCI HAR Dataset/activity_labels.txt", col.names=c(activityID,activity))
   
   # Load features
-  features <<- readFile("./UCI HAR Dataset/features.txt")[,2]
+  features <- readFile("./UCI HAR Dataset/features.txt")[,2]
   
   # Load the train and test datasets
-  test <<- loadDataset("test")
-  train <<- loadDataset("train")
+  test <- loadDataset("test")
+  train <- loadDataset("train")
   
   ## 1. Combine the dataset rows into a single dataset
-  dataset <<- rbind(train,test)
+  dataset <- rbind(train,test)
   
   ## 2. Extract columns with mean & std in the name
-  meanStdColumns <<- grep("mean|std",names(dataset),ignore.case=FALSE)
-  meanStdDataset <<- cbind(dataset[,c(subjectID, activityID)], dataset[,meanStdColumns])
+  meanStdColumns <- grep("mean|std",names(dataset),ignore.case=FALSE)
+  meanStdDataset <- cbind(dataset[,c(subjectID, activityID)], dataset[,meanStdColumns])
   
   ## 3. Use descriptive activity names to name the activities in the data set
   meanStdDataset<-merge(activityLabels,meanStdDataset,by.x=activityID,by.y=activityID,all=TRUE)
